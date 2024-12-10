@@ -1,10 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import favoritesReducer from './favoritesSlice'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import favoritesReducer from './favoritesReducer'
+import searchReducer from './searchReducer'
 
-const store = configureStore({
-  reducer: {
-    favorites: favoritesReducer,
-  },
+const rootReducer = combineReducers({
+  favorites: favoritesReducer,
+  search: searchReducer,
 })
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default store
